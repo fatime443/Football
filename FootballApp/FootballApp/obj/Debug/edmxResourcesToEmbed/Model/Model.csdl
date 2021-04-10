@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FootballDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="53" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Custo__2F10007B" FromRole="Customers" ToRole="Reservations" />
+  </EntityType>
+  <EntityType Name="Reservation_TO_Rooms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomNum" Type="Int32" Nullable="false" />
+    <Property Name="ReservationNum" Type="Int32" Nullable="false" />
+    <Property Name="ReservationId" Type="Int32" />
+    <Property Name="RoomId" Type="Int32" />
+    <NavigationProperty Name="Reservation" Relationship="Self.FK__Reservati__Reser__33D4B598" FromRole="Reservation_TO_Rooms" ToRole="Reservations" />
+    <NavigationProperty Name="Room" Relationship="Self.FK__Reservati__RoomI__34C8D9D1" FromRole="Reservation_TO_Rooms" ToRole="Rooms" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PlayersCount" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="WorkerId" Type="Int32" />
+    <Property Name="StadiumId" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Reservati__Custo__2F10007B" FromRole="Reservations" ToRole="Customers" />
+    <NavigationProperty Name="Reservation_TO_Rooms" Relationship="Self.FK__Reservati__Reser__33D4B598" FromRole="Reservations" ToRole="Reservation_TO_Rooms" />
+    <NavigationProperty Name="Stadium" Relationship="Self.FK__Reservati__Stadi__30F848ED" FromRole="Reservations" ToRole="Stadiums" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__Reservati__Worke__300424B4" FromRole="Reservations" ToRole="Workers" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Workers" Relationship="Self.FK_Workers_Roles" FromRole="Roles" ToRole="Workers" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Room_Number" Type="Int32" Nullable="false" />
+    <Property Name="MaxUser" Type="Int32" Nullable="false" />
+    <Property Name="isVIP" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Reservation_TO_Rooms" Relationship="Self.FK__Reservati__RoomI__34C8D9D1" FromRole="Rooms" ToRole="Reservation_TO_Rooms" />
+  </EntityType>
+  <EntityType Name="Stadium">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Number" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Stadi__30F848ED" FromRole="Stadiums" ToRole="Reservations" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Worker">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Worke__300424B4" FromRole="Workers" ToRole="Reservations" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Workers_Roles" FromRole="Workers" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK__Reservati__Custo__2F10007B">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Reser__33D4B598">
+    <End Role="Reservations" Type="Self.Reservation" Multiplicity="0..1" />
+    <End Role="Reservation_TO_Rooms" Type="Self.Reservation_TO_Rooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation_TO_Rooms">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__RoomI__34C8D9D1">
+    <End Role="Rooms" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="Reservation_TO_Rooms" Type="Self.Reservation_TO_Rooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation_TO_Rooms">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Stadi__30F848ED">
+    <End Role="Stadiums" Type="Self.Stadium" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stadiums">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="StadiumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Worke__300424B4">
+    <End Role="Workers" Type="Self.Worker" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Workers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="WorkerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Workers_Roles">
+    <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Workers" Type="Self.Worker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Workers">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FootballDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Reservation_TO_Rooms" EntityType="Self.Reservation_TO_Rooms" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <EntitySet Name="Stadiums" EntityType="Self.Stadium" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Workers" EntityType="Self.Worker" />
+    <AssociationSet Name="FK__Reservati__Custo__2F10007B" Association="Self.FK__Reservati__Custo__2F10007B">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Reser__33D4B598" Association="Self.FK__Reservati__Reser__33D4B598">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Reservation_TO_Rooms" EntitySet="Reservation_TO_Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__RoomI__34C8D9D1" Association="Self.FK__Reservati__RoomI__34C8D9D1">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Reservation_TO_Rooms" EntitySet="Reservation_TO_Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Stadi__30F848ED" Association="Self.FK__Reservati__Stadi__30F848ED">
+      <End Role="Stadiums" EntitySet="Stadiums" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Worke__300424B4" Association="Self.FK__Reservati__Worke__300424B4">
+      <End Role="Workers" EntitySet="Workers" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Workers_Roles" Association="Self.FK_Workers_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Workers" EntitySet="Workers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

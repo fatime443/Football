@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80422dd3f261412590cd7cef83f747c2" Name="Diagram1">
+        <EntityTypeShape EntityType="FootballDbModel.Customer" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballDbModel.Reservation_TO_Rooms" Width="2.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballDbModel.Reservation" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballDbModel.Role" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballDbModel.Room" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballDbModel.Stadium" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballDbModel.sysdiagram" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FootballDbModel.Worker" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="FootballDbModel.FK__Reservati__Custo__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballDbModel.FK__Reservati__Reser__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballDbModel.FK__Reservati__RoomI__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballDbModel.FK__Reservati__Stadi__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballDbModel.FK__Reservati__Worke__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="FootballDbModel.FK_Workers_Roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
